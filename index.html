@@ -14,17 +14,64 @@
   </head>
   <body>
 
+    <content-index></content-index>
+
+    <section class="main-content">
+      <h1>Title 1</h1>
+      <h2>Sub Title</h2>
+      <p>naver</p>
+    </section>
+    
+    <section class="main-content">
+      <h1>Title 2</h1>
+      <h2>Sub Title</h2>
+      <p>google</p>
+    </section>
+    
+    <section class="main-content">
+      <h1>Title 3</h1>
+      <h2>Sub Title</h2>
+      <p>cupang</p>
+    </section>
+    
+    <section class="main-content">
+      <h1>Title 4</h1>
+      <h2>Sub Title</h2>
+      <p>Apple</p>
+    </section>
+    
+    <section class="main-content">
+      <h1>Title 5</h1>
+      <h2>Sub Title</h2>
+      <p>Samsung</p>
+    </section>
+    
     <script>
+
+      const getTitle = node => node.getElementsByTagName('h1')[0].innerText;
+      const insertContentTitle = (list, title) => {
+        let listItem = document.createElement('li');
+
+        listItem.innerText = title;
+        list.appendChild(listItem);
+      }
+
       class ContentIndex extends HTMLElement {
         connectedCallback() {
           let wrap = document.createElement('div');
           let list = document.createElement('ul');
 
-          
+          let contentElementList = document.getElementsByClassName('main-content');
+
+          [...contentElementList].map(item => {
+            insertContentTitle(list, getTitle(item));
+          });
+
+          this.append(list);
         }
       }
 
-      customElements.define("custom-input", CustomInput);
+      window.customElements.define("content-index", ContentIndex);
     </script>
   </body>
 </html>
